@@ -7,9 +7,9 @@ var Enemy = function(x, y, speed) {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
 
-    this.x = 0;
-    this.y = 0;
-    this.height = 80;
+    this.x = x;
+    this.y = y;
+    this.height = 70;
     this.width = 80;
     this.speed = speed;
 };
@@ -38,7 +38,7 @@ function Player(x, y) {
   this.sprite = 'images/char-boy.png';
   this.x = x;
   this.y = y;
-  this.height = 80;
+  this.height = 70;
   this.width = 80;
 }
 
@@ -122,9 +122,11 @@ function detectCollision(object1, object2) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-const bug1 = new Enemy(0, 0, 40);
-const allEnemies = [bug1];
-const player = new Player(200, 300);
+const bug1 = new Enemy(0, 60, 80);
+const bug2 = new Enemy(0, 140, 40);
+const bug3 = new Enemy(0, 225, 140);
+const allEnemies = [bug1, bug2, bug3];
+const player = new Player(200, 305);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
