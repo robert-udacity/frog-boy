@@ -66,6 +66,8 @@ class Player {
           this.y = this.y - 82;
         }
 
+        checkWin();
+
         break;
       case 'down':
         // y-value of 400 is the bottom row
@@ -134,6 +136,18 @@ function detectCollision(object1, object2) {
 
 function youLose() {
   player.reset();
+}
+
+function youWin() {
+  console.log(`win! player.y = ${player.y}`);
+  player.reset();
+}
+
+function checkWin() {
+  // y-value is ~23 when player reaches the water 
+  if (player.y < -22) {
+    youWin();
+  }
 }
 
 // Now instantiate your objects.
