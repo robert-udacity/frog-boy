@@ -38,6 +38,7 @@ function Player(x, y) {
 }
 
 Player.prototype.update = function(dt) {
+  console.log(`Player: (${this.x}, ${this.y})`);
 }
 
 Player.prototype.render = function() {
@@ -45,18 +46,43 @@ Player.prototype.render = function() {
 }
 
 Player.prototype.handleInput = function(keyCode) {
+  // Moving up/down === ~82
+  // Moving left/right === 100
   switch (keyCode) {
     case 'up':
-      this.y = this.y - 82;
+      if ((this.y - 82) < -28) {
+        // reached the water, you win!
+      } else {
+        this.y = this.y - 82;
+      }
+
       break;
     case 'down':
-      this.y = (this.y + 82);
+      // y-value of 400 is the bottom row
+      if (this.y + 82 > 400) {
+        // noop, stay at the bottom
+      } else {
+        this.y = this.y + 82;
+      }
+
       break;
     case 'left':
-      this.x = (this.x - 100);
+      // x-value of 0 is the left edge
+      if (this.x - 100 < 0) {
+        // noop, stay at the left edge
+      } else {
+        this.x = this.x - 100;
+      }
+
       break;
     case 'right':
-      this.x = (this.x + 100);
+      // x-value of 500 is the right edge
+      if (this.x + 100 >= 500) {
+        // noop, stay at the right edge
+      } else {
+        this.x = this.x + 100;
+      }
+
       break;
     default:
   }
