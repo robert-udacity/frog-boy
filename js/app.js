@@ -19,7 +19,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-    this.x = (this.x + this.speed * dt);
+    this.x = (this.x + this.speed * dt) % 500;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -31,8 +31,10 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-function Player() {
+function Player(x, y) {
   this.sprite = 'images/char-boy.png';
+  this.x = x;
+  this.y = y;
 }
 
 Player.prototype.update = function(dt) {
@@ -52,7 +54,7 @@ Player.prototype.handleInput = function(keyCode) {
 
 const bug1 = new Enemy(0, 0, 40);
 const allEnemies = [bug1];
-const player = new Player();
+const player = new Player(200, 300);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
