@@ -9,6 +9,8 @@ var Enemy = function(x, y, speed) {
 
     this.x = 0;
     this.y = 0;
+    this.height = 80;
+    this.width = 80;
     this.speed = speed;
 };
 
@@ -20,6 +22,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     this.x = (this.x + this.speed * dt) % 500;
+    detectCollision(this, player);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -35,10 +38,11 @@ function Player(x, y) {
   this.sprite = 'images/char-boy.png';
   this.x = x;
   this.y = y;
+  this.height = 80;
+  this.width = 80;
 }
 
 Player.prototype.update = function(dt) {
-  console.log(`Player: (${this.x}, ${this.y})`);
 }
 
 Player.prototype.render = function() {
@@ -85,6 +89,32 @@ Player.prototype.handleInput = function(keyCode) {
 
       break;
     default:
+  }
+}
+
+function detectCollision(object1, object2) {
+  // collision detection references:
+  //   * https://stackoverflow.com/questions/13916966/adding-collision-detection-to-images-drawn-on-canvas
+  //   * http://blog.sklambert.com/html5-canvas-game-2d-collision-detection/#d-collision-detection
+  //   * https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+
+  if (object1.x < object2.x + object2.width  &&
+      object1.x + object1.width  > object2.x &&
+  		object1.y < object2.y + object2.height &&
+      object1.y + object1.height > object2.y) {
+
+    // objects collided
+    console.log(`collision!  enemy(${object1.x},${object1.y}), player(${object2.x}, ${object2.y})`);
+    let c1 = object1.x < object2.x + object2.width;
+    let c2 = object1.x + object1.width  > object2.x;
+    let c3 = object1.y < object2.y + object2.height;
+    let c4 = object1.y + object1.height > object2.y;
+    console.log(`object1.x:${object1.x} < object2.x:${object2.x} + object2.width:${object2.width} === ${c1}`);
+    console.log(`object1.x:${object1.x} + object1.width:${object1.width} > object2.x:${object2.x} === ${c2}`);
+    console.log(`object1.y:${object1.y} < object2.y:${object2.y} + object2.height:${object2.height} === ${c3}`);
+    console.log(`object1.y:${object1.y} + object1.height:${object1.height} > object2.y:${object2.y} === ${c4}`);
+  } else {
+    // no-op, no collision
   }
 }
 
