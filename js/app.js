@@ -1,3 +1,6 @@
+const PLAYER_START_POSITION_X = 200;
+const PLAYER_START_POSITION_Y = 305;
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -92,6 +95,11 @@ Player.prototype.handleInput = function(keyCode) {
   }
 }
 
+Player.prototype.reset = function() {
+  this.x = PLAYER_START_POSITION_X;
+  this.y = PLAYER_START_POSITION_Y;
+}
+
 function detectCollision(object1, object2) {
   // collision detection references:
   //   * https://stackoverflow.com/questions/13916966/adding-collision-detection-to-images-drawn-on-canvas
@@ -113,9 +121,15 @@ function detectCollision(object1, object2) {
     console.log(`object1.x:${object1.x} + object1.width:${object1.width} > object2.x:${object2.x} === ${c2}`);
     console.log(`object1.y:${object1.y} < object2.y:${object2.y} + object2.height:${object2.height} === ${c3}`);
     console.log(`object1.y:${object1.y} + object1.height:${object1.height} > object2.y:${object2.y} === ${c4}`);
+
+    youLose();
   } else {
     // no-op, no collision
   }
+}
+
+function youLose() {
+  player.reset();
 }
 
 // Now instantiate your objects.
@@ -126,7 +140,7 @@ const bug1 = new Enemy(0, 60, 80);
 const bug2 = new Enemy(0, 140, 40);
 const bug3 = new Enemy(0, 225, 140);
 const allEnemies = [bug1, bug2, bug3];
-const player = new Player(200, 305);
+const player = new Player(PLAYER_START_POSITION_X, PLAYER_START_POSITION_Y);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
