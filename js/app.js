@@ -38,7 +38,6 @@ function Player(x, y) {
 }
 
 Player.prototype.update = function(dt) {
-
 }
 
 Player.prototype.render = function() {
@@ -46,6 +45,21 @@ Player.prototype.render = function() {
 }
 
 Player.prototype.handleInput = function(keyCode) {
+  switch (keyCode) {
+    case 'up':
+      this.y = this.y - 82;
+      break;
+    case 'down':
+      this.y = (this.y + 82);
+      break;
+    case 'left':
+      this.x = (this.x - 100);
+      break;
+    case 'right':
+      this.x = (this.x + 100);
+      break;
+    default:
+  }
 }
 
 // Now instantiate your objects.
