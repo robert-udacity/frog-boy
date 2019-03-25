@@ -1,5 +1,9 @@
 const PLAYER_START_POSITION_X = 200;
 const PLAYER_START_POSITION_Y = 305;
+// Moving left/right === 100
+const X_STEP = 100;
+// Moving up/down === ~82
+const Y_STEP = 82;
 
 class Character {
   constructor (x, y) {
@@ -69,14 +73,12 @@ class Player extends Character {
   }
 
   handleInput (keyCode) {
-    // Moving up/down === ~82
-    // Moving left/right === 100
     switch (keyCode) {
       case 'up':
-        if ((this.y - 82) < -28) {
+        if ((this.y - Y_STEP) < -28) {
           // reached the water, you win!
         } else {
-          this.y = this.y - 82;
+          this.y = this.y - Y_STEP;
         }
 
         checkWin();
@@ -84,28 +86,28 @@ class Player extends Character {
         break;
       case 'down':
         // y-value of 400 is the bottom row
-        if (this.y + 82 > 400) {
+        if (this.y + Y_STEP > 400) {
           // noop, stay at the bottom
         } else {
-          this.y = this.y + 82;
+          this.y = this.y + Y_STEP;
         }
 
         break;
       case 'left':
         // x-value of 0 is the left edge
-        if (this.x - 100 < 0) {
+        if (this.x - X_STEP < 0) {
           // noop, stay at the left edge
         } else {
-          this.x = this.x - 100;
+          this.x = this.x - X_STEP;
         }
 
         break;
       case 'right':
         // x-value of 500 is the right edge
-        if (this.x + 100 >= 500) {
+        if (this.x + X_STEP >= 500) {
           // noop, stay at the right edge
         } else {
-          this.x = this.x + 100;
+          this.x = this.x + X_STEP;
         }
 
         break;
