@@ -144,7 +144,7 @@ function youWin() {
 }
 
 function checkWin() {
-  // y-value is ~23 when player reaches the water 
+  // y-value is ~23 when player reaches the water
   if (player.y < -22) {
     youWin();
   }
@@ -172,3 +172,23 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+let musicPlaying = false;
+
+function toggleMusic() {
+  if (musicPlaying) {
+    musicPlaying = false;
+    myMusic.pause();
+  } else {
+    musicPlaying = true;
+    myMusic.play();
+  }
+}
+
+// https://www.w3schools.com/graphics/game_sound.asp
+// https://developer.mozilla.org/en-US/docs/Games/Techniques/Audio_for_Web_Games
+// http://freemusicarchive.org/music/Kevin_MacLeod/Classical_Sampler/Gymnopedie_No_1
+const myMusic = new Audio("music/Kevin_MacLeod_-_Erik_Satie_Gymnopedie_No_1.mp3");
+myMusic.loop = true;
+
+document.querySelector("#button-music-toggle").addEventListener("click", toggleMusic);
