@@ -193,8 +193,8 @@ function randomSpeed(min, max) {
 // Place the player object in a variable called player
 
 let bug1 = new Enemy(0, 60, randomSpeed(100, 300));
-let bug2 = new Enemy(-80, 140, randomSpeed(100, 300));
-let bug3 = new Enemy(0, 225, randomSpeed(100,300));
+let bug2 = new Enemy(300, 140, randomSpeed(100, 300));
+let bug3 = new Enemy(200, 225, randomSpeed(100,300));
 let allEnemies = [bug1, bug2, bug3];
 const player = new Player(PLAYER_START_POSITION_X, PLAYER_START_POSITION_Y);
 
