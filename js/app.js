@@ -30,10 +30,8 @@ class Enemy extends Character {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-
-    this.x = x;
-    this.y = y;
     this.speed = speed;
+    this.startX = x;
   }
 
   // Update the enemy's position, required method for game
@@ -54,7 +52,7 @@ class Enemy extends Character {
   }
 
   reset () {
-    this.x = 0;
+    this.x = this.startX;
     this.speed = randomSpeed(100, 300);
   }
 }
