@@ -141,6 +141,7 @@ function youLose() {
 function youWin() {
   console.log(`win! player.y = ${player.y}`);
   player.reset();
+  updateScore();
 }
 
 function checkWin() {
@@ -148,6 +149,12 @@ function checkWin() {
   if (player.y < -22) {
     youWin();
   }
+}
+
+function updateScore() {
+  const wins = document.querySelector('#wins');
+  gameData.wins = gameData.wins + 1;
+  wins.textContent = gameData.wins;
 }
 
 // Now instantiate your objects.
@@ -190,5 +197,10 @@ function toggleMusic() {
 // http://freemusicarchive.org/music/Kevin_MacLeod/Classical_Sampler/Gymnopedie_No_1
 const myMusic = new Audio("music/Kevin_MacLeod_-_Erik_Satie_Gymnopedie_No_1.mp3");
 myMusic.loop = true;
+
+const gameData = {
+  wins: 0,
+  losses: 0,
+};
 
 document.querySelector("#button-music-toggle").addEventListener("click", toggleMusic);
