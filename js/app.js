@@ -52,6 +52,11 @@ class Enemy extends Character {
   render () {
     super.render();
   }
+
+  reset () {
+    this.x = 0;
+    this.speed = randomSpeed(100, 300);
+  }
 }
 
 // Now write your own player class
@@ -151,11 +156,13 @@ function detectCollision(object1, object2) {
 
 function youLose() {
   player.reset();
+  allEnemies.forEach((bug) => bug.reset());
 }
 
 function youWin() {
   console.log(`win! player.y = ${player.y}`);
   player.reset();
+  allEnemies.forEach((bug) => bug.reset());
   updateScore();
 }
 
@@ -172,14 +179,23 @@ function updateScore() {
   wins.textContent = gameData.wins;
 }
 
+function randomSpeed(min, max) {
+  let n = Math.floor(Math.random() * max);
+
+  if (n < min) {
+    n = min;
+  }
+
+  return n
+}
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-const bug1 = new Enemy(0, 60, 200);
-const bug2 = new Enemy(-80, 140, 90);
-const bug3 = new Enemy(0, 225, 140);
-const allEnemies = [bug1, bug2, bug3];
+let bug1 = new Enemy(0, 60, randomSpeed(100, 300));
+let bug2 = new Enemy(-80, 140, randomSpeed(100, 300));
+let bug3 = new Enemy(0, 225, randomSpeed(100,300));
+let allEnemies = [bug1, bug2, bug3];
 const player = new Player(PLAYER_START_POSITION_X, PLAYER_START_POSITION_Y);
 
 // This listens for key presses and sends the keys to your
