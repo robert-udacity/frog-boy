@@ -6,6 +6,8 @@ const X_STEP = 100;
 const Y_STEP = 82;
 
 class Character {
+  // x: x-coordinate
+  // y: y-coordinate
   constructor (x, y) {
     this.x = x;
     this.y = y;
@@ -13,12 +15,17 @@ class Character {
     this.width = 80;
   }
 
-  update (dt) {
-  }
+  // Update the character's position, required method for game
+  // Parameter: dt, a time delta between ticks
+  update (dt) {}
 
+  // Draw the character on the screen, required method for game
   render () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
+
+  // reset the character state
+  reset () {}
 }
 
 // Enemies our player must avoid
@@ -34,8 +41,6 @@ class Enemy extends Character {
     this.startX = x;
   }
 
-  // Update the enemy's position, required method for game
-  // Parameter: dt, a time delta between ticks
   update (dt) {
     super.update(dt);
     // You should multiply any movement by the dt parameter
@@ -46,7 +51,6 @@ class Enemy extends Character {
     detectCollision(this, player);
   }
 
-  // Draw the enemy on the screen, required method for game
   render () {
     super.render();
   }
@@ -124,6 +128,7 @@ class Player extends Character {
   }
 }
 
+// detects a collision between the given objects
 function detectCollision(object1, object2) {
   // collision detection references:
   //   * https://stackoverflow.com/questions/13916966/adding-collision-detection-to-images-drawn-on-canvas
@@ -153,15 +158,19 @@ function detectCollision(object1, object2) {
 }
 
 function youLose() {
-  player.reset();
-  allEnemies.forEach((bug) => bug.reset());
+  resetCharactersState();
 }
 
 function youWin() {
   console.log(`win! player.y = ${player.y}`);
+  resetCharactersState();
+  updateScore();
+}
+
+// resets the enemies and the player
+function resetCharactersState() {
   player.reset();
   allEnemies.forEach((bug) => bug.reset());
-  updateScore();
 }
 
 function checkWin() {
@@ -177,6 +186,7 @@ function updateScore() {
   wins.textContent = gameData.wins;
 }
 
+// Return a random integer between min and max
 function randomSpeed(min, max) {
   let n = Math.floor(Math.random() * max);
 
@@ -184,8 +194,9 @@ function randomSpeed(min, max) {
     n = min;
   }
 
-  return n
+  return n;
 }
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -209,8 +220,14 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
+// https://www.w3schools.com/graphics/game_sound.asp
+// https://developer.mozilla.org/en-US/docs/Games/Techniques/Audio_for_Web_Games
+// http://freemusicarchive.org/music/Kevin_MacLeod/Classical_Sampler/Gymnopedie_No_1
+const myMusic = new Audio("music/Kevin_MacLeod_-_Erik_Satie_Gymnopedie_No_1.mp3");
+myMusic.loop = true;
 let musicPlaying = false;
 
+// pause and play the background music
 function toggleMusic() {
   const musicIcon = document.querySelector("#button-music-toggle");
 
@@ -226,12 +243,6 @@ function toggleMusic() {
     musicIcon.setAttribute('alt', "music on");
   }
 }
-
-// https://www.w3schools.com/graphics/game_sound.asp
-// https://developer.mozilla.org/en-US/docs/Games/Techniques/Audio_for_Web_Games
-// http://freemusicarchive.org/music/Kevin_MacLeod/Classical_Sampler/Gymnopedie_No_1
-const myMusic = new Audio("music/Kevin_MacLeod_-_Erik_Satie_Gymnopedie_No_1.mp3");
-myMusic.loop = true;
 
 const gameData = {
   wins: 0,
