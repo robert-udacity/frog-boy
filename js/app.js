@@ -196,12 +196,18 @@ document.addEventListener('keyup', function(e) {
 let musicPlaying = false;
 
 function toggleMusic() {
+  const musicIcon = document.querySelector("#button-music-toggle");
+
   if (musicPlaying) {
     musicPlaying = false;
     myMusic.pause();
+    musicIcon.setAttribute('src', "./images/icons8-no-audio-32.png");
+    musicIcon.setAttribute('alt', "music off");
   } else {
     musicPlaying = true;
     myMusic.play();
+    musicIcon.setAttribute('src', "./images/icons8-sound-32.png");
+    musicIcon.setAttribute('alt', "music on");
   }
 }
 
