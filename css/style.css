@@ -40,8 +40,32 @@ body {
   text-align: left;
 }
 
+header {
+  border-bottom: 2px solid black;
+  padding-bottom: 15px;
+}
+
 .instructions {
   padding-top: 15px;
   font-size: 0.8em;
   text-align: center;
+}
+
+.status-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.status-bar .controls {
+  margin-left: auto;
+}
+
+.button {
+  background-color: #D1D1C7;
+  font-family: Fipps, Arial, Helvetica, sans-serif;
+  border: 3px solid #84C053;
+  padding: 4px 15px;
+  font-size: 0.8em;
+  font-weight: bold;
+  border: 3px solid black;
 }
