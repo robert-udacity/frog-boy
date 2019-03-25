@@ -10,9 +10,9 @@ Head to https://robert-udacity.github.io/frog-boy
 * if you hit a bug, start back on the grass
 * if you make it to the water you win and get a point and then start back on the grass
 
-Game play:
+## Screenshots
 
-<img alt="gameplay" src="https://user-images.githubusercontent.com/734194/54895736-056f9780-4e8f-11e9-92e4-a77b853947d3.png">
+<img alt="gameplay" src="https://user-images.githubusercontent.com/734194/54896795-d60f5980-4e93-11e9-8043-d803ba874d73.png">
 
 ## Miscellaneous
 

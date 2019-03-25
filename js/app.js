@@ -83,7 +83,7 @@ class Player extends Character {
     switch (keyCode) {
       case 'up':
         if ((this.y - Y_STEP) < -28) {
-          // reached the water, you win!
+          // reached the water, you get a point!
         } else {
           this.y = this.y - Y_STEP;
         }
@@ -181,9 +181,9 @@ function checkWin() {
 }
 
 function updateScore() {
-  const wins = document.querySelector('#wins');
-  gameData.wins = gameData.wins + 1;
-  wins.textContent = gameData.wins;
+  const points = document.querySelector('#points');
+  gameData.points = gameData.points + 1;
+  points.textContent = gameData.points;
 }
 
 // Return a random integer between min and max
@@ -245,8 +245,7 @@ function toggleMusic() {
 }
 
 const gameData = {
-  wins: 0,
-  losses: 0,
+  points: 0,
 };
 
 document.querySelector("#button-music-toggle").addEventListener("click", toggleMusic);
