@@ -1,11 +1,27 @@
 const PLAYER_START_POSITION_X = 200;
 const PLAYER_START_POSITION_Y = 305;
 
+class Character {
+  constructor (x, y) {
+    this.x = x;
+    this.y = y;
+    this.height = 70;
+    this.width = 80;
+  }
+
+  update (dt) {
+  }
+
+  render () {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
+}
+
 // Enemies our player must avoid
-class Enemy {
+class Enemy extends Character {
   constructor (x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+    super(x, y);
+    this.speed = speed
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -13,46 +29,43 @@ class Enemy {
 
     this.x = x;
     this.y = y;
-    this.height = 70;
-    this.width = 80;
     this.speed = speed;
   }
 
   // Update the enemy's position, required method for game
   // Parameter: dt, a time delta between ticks
   update (dt) {
+    super.update(dt);
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
 
     this.x = (this.x + this.speed * dt) % 500;
     detectCollision(this, player);
-  };
+  }
 
   // Draw the enemy on the screen, required method for game
   render () {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  };
+    super.render();
+  }
 }
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 
-class Player {
+class Player extends Character {
   constructor (x, y) {
+    super(x, y);
     this.sprite = 'images/char-boy.png';
-    this.x = x;
-    this.y = y;
-    this.height = 70;
-    this.width = 80;
   }
 
   update (dt) {
+    super.update(dt);
   }
 
   render () {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    super.render();
   }
 
   handleInput (keyCode) {
@@ -161,8 +174,8 @@ function updateScore() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-const bug1 = new Enemy(0, 60, 80);
-const bug2 = new Enemy(0, 140, 40);
+const bug1 = new Enemy(0, 60, 200);
+const bug2 = new Enemy(-80, 140, 90);
 const bug3 = new Enemy(0, 225, 140);
 const allEnemies = [bug1, bug2, bug3];
 const player = new Player(PLAYER_START_POSITION_X, PLAYER_START_POSITION_Y);
